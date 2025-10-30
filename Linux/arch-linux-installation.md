@@ -2,7 +2,7 @@
 title: Arch Linux Installation
 description: 
 published: true
-date: 2025-10-30T19:32:13.745Z
+date: 2025-10-30T19:41:14.013Z
 tags: 
 editor: markdown
 dateCreated: 2025-10-30T08:33:52.643Z
@@ -15,16 +15,26 @@ Installing arch (with secure boot) is not an easy process and mistakes can easil
 
 This documentation is written with the goal being to install [Omarchy](https://omarchy.org/) on top of Arch so regarding archinstall options I mainly followed the documentation [here](https://learn.omacom.io/2/the-omarchy-manual/96/manual-installation).
 
+Don't forget to check the sources at the end of this page if you feel lost or unsure of what to do.
+
 ## Table of Contents
 
 1. [Prepare your system](#prepare)
 2. [Partitionning (dual booting with windows)](#partitionning)
 3. [Configuring the bootloader](#configuring-the-bootloader)
+4. [Setup Secure Boot](#secure-boot)
 
 ## <a name="prepare"></a> Prepare your system
 
 In order to dual boot Arch Linux with Windows, you have to configure the partitions manually.
-First, create an empty partition on the same drive where Windows is installed. Then, boot on the Arch installation ISO.
+First, create an empty partition on the same drive where Windows is installed. 
+
+Before restarting, Windows hibernation is known to cause issues with dual booting so disable it using an administrator CMD prompt :
+```
+powercfg /H off
+```
+
+Then, boot on your BIOS and **DISABLE** Secure Boot as the Arch installation media is not signed. You can then boot on your install media.
 
 Once inside Arch live ISO, configure you locale using loadkeys; *e.g. loadkeys fr*
 
@@ -82,14 +92,16 @@ EOF
 ```
 
 ### Without LUKS
-/boot/refind_linux.conf where PARTUUID is the unique id attributed to your root partition
+/boot/refind_linux.conf where PARTUUID is the unique id attributed to your root partition (check with lsblk)
 ```
 "Boot using default options"     "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap"
 "Boot using fallback initramfs"  "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
 "Boot to terminal"               "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap systemd.unit=multi-user.target"
 ```
 
-## Setup secure boot
+You can now exit and reboot your machine and check if your boot configuratin is correct (hopefully). Don't forget to change your UEFI boot order or you'll boot on Windows.
+
+## <a name="secure-boot"></a> Setup secure boot
 
 ## Sources
 
