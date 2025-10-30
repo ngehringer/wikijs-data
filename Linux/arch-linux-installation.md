@@ -2,7 +2,7 @@
 title: Arch Linux Installation
 description: 
 published: true
-date: 2025-10-30T08:33:52.643Z
+date: 2025-10-30T08:36:30.040Z
 tags: 
 editor: markdown
 dateCreated: 2025-10-30T08:33:52.643Z
@@ -21,3 +21,14 @@ Installing arch (with secure boot) is not an easy process and mistakes can easil
 ## <a name="partitioning"></a>Partitioning (dual booting with windows)
 
 ## <a name="configuring-the-bootloader"></a>Configuring the bootloader
+
+## Sources
+
+https://github.com/Foxboron/sbctl?tab=readme-ov-file
+https://wiki.archlinux.org/title/REFInd
+https://github.com/archlinux/archinstall?tab=readme-ov-file#how-to-dual-boot-with-windows
+https://wiki.archlinux.org/title/Dual_boot_with_Windows
+https://wiki.archlinux.org/title/Hyprland
+https://wiki.archlinux.org/title/Installation_guide
+https://wiki.archlinux.org/title/Archinstall
+https://itsfoss.com/install-yay-arch-linux/
