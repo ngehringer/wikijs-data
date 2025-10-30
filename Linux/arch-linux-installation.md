@@ -2,7 +2,7 @@
 title: Arch Linux Installation
 description: 
 published: true
-date: 2025-10-30T20:23:40.737Z
+date: 2025-10-30T20:38:09.544Z
 tags: 
 editor: markdown
 dateCreated: 2025-10-30T08:33:52.643Z
@@ -26,8 +26,7 @@ Don't forget to check the sources at the end of this page if you feel lost or un
 3. [Configuring the bootloader](#configuring-the-bootloader)
 4. [Setup Secure Boot](#secure-boot)
 5. [Install OMARCHY](#omarchy)
-6. [(Optional) Install NVIDIA proprietary drivers](#nvidia-drivers)
-7. [Sources](#sources)
+6. [Sources](#sources)
 
 ## <a name="prepare"></a> Prepare your system
 
@@ -106,7 +105,7 @@ EOF
 "Boot to terminal"               "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap systemd.unit=multi-user.target"
 ```
 
-You can now exit and reboot your machine and check if your boot configuratin is correct (hopefully). Don't forget to change your UEFI boot order or you'll boot on Windows.
+You can now exit and reboot your machine and check if your boot configuratin is correct (hopefully). Don't forget to change your UEFI boot order or you'll boot into Windows.
 
 ## <a name="secure-boot"></a> Setup secure boot
 
@@ -119,7 +118,6 @@ pacman -S sbctl
 
 Once sbctl is installed, basically follow sbctl guide to create a signing key, enroll it and sign your bootloader and your kernel :
 
-RUN AS ROOT
 ```bash
 # Check sbctl status
 sbctl status
@@ -159,9 +157,9 @@ To install Omarchy, run the following script
 curl -fsSL https://omarchy.org/install | bash
 ```
 
-## <a name="nvidia-drivers"></a> (Optional) Install NVIDIA proprietary drivers
+You're going to have warnings because of Secure Boot, ReFind and because we used ext4 instead of brtfs but you can safely ignore them.
 
-## Sources
+## <a name="sources"></a> Sources
 
 https://github.com/Foxboron/sbctl?tab=readme-ov-file
 https://wiki.archlinux.org/title/REFInd
