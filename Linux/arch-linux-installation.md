@@ -2,7 +2,7 @@
 title: Arch Linux Installation
 description: 
 published: true
-date: 2025-10-30T20:38:09.544Z
+date: 2025-10-30T23:12:01.288Z
 tags: 
 editor: markdown
 dateCreated: 2025-10-30T08:33:52.643Z
