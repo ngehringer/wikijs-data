@@ -2,7 +2,7 @@
 title: Arch Linux Installation
 description: 
 published: true
-date: 2025-10-30T23:12:01.288Z
+date: 2025-11-01T17:03:51.691Z
 tags: 
 editor: markdown
 dateCreated: 2025-10-30T08:33:52.643Z
@@ -98,11 +98,17 @@ EOF
 ```
 
 ### Without LUKS
-/boot/refind_linux.conf where PARTUUID is the unique id attributed to your root partition (check with lsblk)
-```
-"Boot using default options"     "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap"
-"Boot using fallback initramfs"  "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
-"Boot to terminal"               "root=PARTUUID=ff6416fd-9462-4bd4-94f5-133787fae1a3 rw add_efi_memmap systemd.unit=multi-user.target"
+Scripting refind_linux.conf (change p2 accordingly to your available partitions)
+```bash
+BLOCK_DEVICE=/dev/nvme0n1 # Your device common identifier
+ROOT_UUID=$(blkid -s UUID -o value "${BLOCK_DEVICE}p2")
+BOOT_OPTIONS="root=PARTUUID=${ROOT_UUID}"
+
+cat <<EOF >/mnt/boot/refind_linux.conf
+"Boot with standard options"  "${BOOT_OPTIONS} rw loglevel=3"
+"Boot to single-user mode"    "${BOOT_OPTIONS} rw loglevel=3 single"
+"Boot with minimal options"   "ro ${BOOT_OPTIONS}"
+EOF
 ```
 
 You can now exit and reboot your machine and check if your boot configuratin is correct (hopefully). Don't forget to change your UEFI boot order or you'll boot into Windows.
